@@ -13,6 +13,7 @@ class Visiting extends Model
 
     protected $fillable = [
         'supervisor_name',
+        'school_name',
         'date',
         'form',
     ];

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('visitings', function (Blueprint $table) {
             $table->id();
             $table->string('supervisor_name');
+            $table->string('school_name');
             $table->date('date');
             $table->string('form');
             

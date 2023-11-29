@@ -12,6 +12,7 @@ class VisitingController extends Controller
     {
         return Validator::make($data, [
             'supervisor_name' => 'required|string',
+            'school_name' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
             'form' => 'required|mimes:pdf',
         ]);
@@ -27,6 +28,7 @@ class VisitingController extends Controller
         $visiting = new Visiting;
 
         $visiting->supervisor_name = $request['supervisor_name'];
+        $visiting->school_name = $request['school_name'];
         $visiting->date = $request['date'];
 
         if ($request->hasFile('form')) {
