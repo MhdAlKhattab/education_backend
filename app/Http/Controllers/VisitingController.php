@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Visiting;
+use App\Mail\MailNotify;
+use Mail;
 
 class VisitingController extends Controller
 {
@@ -53,6 +55,15 @@ class VisitingController extends Controller
         }
 
         $visiting->save();
+
+        $mailData = [
+            'type' => 'زيارة',
+            'supervisor_name' => $request['supervisor_name'],
+        ];
+
+        // tseen1791@moe.gov.sa
+
+        Mail::to('mohammadalkhatab123@gmail.com')->send(new MailNotify($mailData));
 
         return response()->json(['data' => $visiting], 200);
     }

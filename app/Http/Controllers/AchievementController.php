@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Achievement;
+use App\Mail\MailNotify;
+use Mail;
 
 class AchievementController extends Controller
 {
@@ -45,6 +47,13 @@ class AchievementController extends Controller
         $achievement->target_group = $request['target_group'];
 
         $achievement->save();
+
+        $mailData = [
+            'type' => 'منجز',
+            'supervisor_name' => $request['supervisor_name'],
+        ];
+
+        Mail::to('mohammadalkhatab123@gmail.com')->send(new MailNotify($mailData));
 
         return response()->json(['data' => $achievement], 200);
     }
